@@ -9,7 +9,7 @@ const postschema = new mongoose.Schema({
         require:true
     },
     createdat:{
-        type:string,
+        type:String,
         default: new Date()
     },
     createdby:{

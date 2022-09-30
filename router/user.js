@@ -7,7 +7,7 @@ const {
     logoutuser
 }= require("../controller/user");
 
-router.post("/signup",signupuser);
+router.post("/signup",signupser);
 router.post("/login",loginuser);
 router.post("/logout",logoutuser);
 

@@ -1,4 +1,5 @@
 const postmodel  =require("../models/postmodel");
+const { post } = require("../router/post");
 
 const writepost = async (req,res)=>{
     const{title,content,createdat,createdby}= req.body;
@@ -9,7 +10,14 @@ const writepost = async (req,res)=>{
         res.status(500).send("Unable to post")
     }
 };
-
+const getpost = async (req, res) => {
+    try {
+      const getpost = await postmodel.find();
+      res.status(200).send(getpost)
+    } catch (error) {
+      res.status(500).send("MSG : Internal Error");
+    }
+  };
 
 const updatepost = async (req,res)=>{
     const {createdby} = req.params;
@@ -20,11 +28,15 @@ const updatepost = async (req,res)=>{
         res.status(500).send({MSG:"Unable to post"});
     }
 };
-const deletepost = (req,res)=>{
+
+const deletepost = async (req,res)=>{
     const {createdby} = req.params;
-    const deletedpost= await postmodel.findByIdAndDelete(createdby);
+    const deletedpost= await post.findByIdAndDelete(createdby);
     res.status(200).send({MSG:"post deleted"});
 }
 module.exports = {
-    writepost
+    writepost,
+    updatepost,
+    deletepost,
+    getpost
 };
